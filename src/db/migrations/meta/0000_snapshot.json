@@ -1,0 +1,193 @@
+{
+  "id": "b508b872-1448-4d3f-a78c-c8f8c46a180f",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.machines": {
+      "name": "machines",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "identity": {
+            "type": "always",
+            "name": "machines_id_seq",
+            "schema": "public",
+            "increment": "1",
+            "startWith": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
+        },
+        "machine_key": {
+          "name": "machine_key",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "machines_machine_key_unique": {
+          "name": "machines_machine_key_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "machine_key"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.trays": {
+      "name": "trays",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "identity": {
+            "type": "always",
+            "name": "trays_id_seq",
+            "schema": "public",
+            "increment": "1",
+            "startWith": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
+        },
+        "tray_barcode": {
+          "name": "tray_barcode",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "total_eggs": {
+          "name": "total_eggs",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "fertile": {
+          "name": "fertile",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "infertile": {
+          "name": "infertile",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "early_death": {
+          "name": "early_death",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "blood_ring": {
+          "name": "blood_ring",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "machine_id": {
+          "name": "machine_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "tray_barcode_idx": {
+          "name": "tray_barcode_idx",
+          "columns": [
+            {
+              "expression": "tray_barcode",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "trays_machine_id_machines_id_fk": {
+          "name": "trays_machine_id_machines_id_fk",
+          "tableFrom": "trays",
+          "tableTo": "machines",
+          "columnsFrom": [
+            "machine_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {
+        "total_eggs_non_negative": {
+          "name": "total_eggs_non_negative",
+          "value": "\"trays\".\"total_eggs\" >= 0"
+        },
+        "fertile_non_negative": {
+          "name": "fertile_non_negative",
+          "value": "\"trays\".\"fertile\" >= 0"
+        },
+        "infertile_non_negative": {
+          "name": "infertile_non_negative",
+          "value": "\"trays\".\"infertile\" >= 0"
+        },
+        "early_death_non_negative": {
+          "name": "early_death_non_negative",
+          "value": "\"trays\".\"early_death\" >= 0"
+        },
+        "blood_ring_non_negative": {
+          "name": "blood_ring_non_negative",
+          "value": "\"trays\".\"blood_ring\" >= 0"
+        }
+      },
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
