@@ -3,7 +3,7 @@ import * as routes from './routes.js'
 import * as handlers from './handlers.js'
 
 
-const traysRouter = createRouter()
+const traysRouter = createRouter().basePath('/trays')
   .openapi(routes.getOneByBarcode, handlers.getOneByBarcode)
   .openapi(routes.getList, handlers.getList)
 

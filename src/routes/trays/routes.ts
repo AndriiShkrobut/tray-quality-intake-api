@@ -7,7 +7,7 @@ const tags = ['Trays']
 
 
 export const getOneByBarcode = createRoute({
-  path: '/trays/{barcode}',
+  path: '/{barcode}',
   method: 'get',
   tags,
   request: {
@@ -41,7 +41,7 @@ export const getOneByBarcode = createRoute({
 export type GetOneByBarcode = typeof getOneByBarcode
 
 export const getList = createRoute({
-  path: '/trays',
+  path: '/',
   method: 'get',
   tags,
   responses: {

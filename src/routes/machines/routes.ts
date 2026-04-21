@@ -7,14 +7,40 @@ import { machineAuthentication } from '@/middlewares/auth.js'
 
 const tags = ['Machines']
 
+export const machinesRegister = createRoute({
+  path: '/register',
+  method: 'post',
+  tags,
+  request: {
+    headers: z.object({
+      'x-admin-key': z.string().openapi({ description: 'Admin/Machine authorization key' })
+    })
+  },
+  responses: {
+    [HttpStatusCodes.CREATED]: {
+      content: {
+        'application/json': { schema: z.string() }
+      },
+      description: 'Machine authentication key (shown once, store it securely)'
+    },
+    [HttpStatusCodes.UNAUTHORIZED]: {
+      content: {
+        'application/json': { schema: z.object({ message: z.string().default('Unauthorized') }) }
+      },
+      description: 'Unauthorized'
+    }
+  }
+})
+export type MachinesRegister = typeof machinesRegister
+
 export const machinesTrayIntake = createRoute({
-  path: '/machines/trays',
+  path: '/trays',
   method: 'post',
   middleware: [machineAuthentication],
   tags,
   request: {
     headers: z.object({
-      'x-machine-key': z.string().openapi({ description: 'Machine Authentication Key' })
+      'x-machine-key': z.string().openapi({ description: 'Machine authentication key' })
     }),
     body: {
       content: {
