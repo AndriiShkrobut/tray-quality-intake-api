@@ -7,7 +7,7 @@ import db from '@/db/index.js'
 
 try {
   const __dirname = dirname(fileURLToPath(import.meta.url))
-  await migrate(db, { migrationsFolder: resolve(__dirname, 'migrations') })
+  await migrate(db, { migrationsFolder: resolve(__dirname, '../migrations') })
 
   console.log('Migrations applied successfully')
   process.exit(0)

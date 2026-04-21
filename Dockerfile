@@ -30,4 +30,4 @@ COPY src/db/migrations ./dist/db/migrations
 ARG PORT=8000
 EXPOSE ${PORT}
 
-CMD ["sh", "-c", "node dist/db/migrate.js && node dist/index.js"]
+CMD ["sh", "-c", "node dist/db/scripts/migrate.js && node dist/index.js"]
